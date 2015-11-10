@@ -175,11 +175,12 @@ def write_data_for_matlab(df, colnames):
 def main():
     if len(sys.argv) == 2:
         filename = str(sys.argv[1])
-    
-    
+        
     table = sample_table(filename)
     grouped_table = group_table(table)
     
+    colnames = []
+    df = pd.DataFrame()
     for name, data in grouped_table:
         snp_list = get_snp_list(data)
         snp_flank_left = []
@@ -206,10 +207,7 @@ def main():
         data.to_csv(name + '.csv', index=False)
         
         trimer_tab = format_trimer_table(data)
-        #for each tumor sample, get value counts at "code"; should be 96 codes total
-        colnames = []
-        df = pd.DataFrame()
-        counts = trimer_tab.code.value_counts()
+        counts = trimer_tab.code.value_counts()  #should be 96 codes total
         colnames.append(name)
         df = pd.concat([df,counts], axis=1)
 
