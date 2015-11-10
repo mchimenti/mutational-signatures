@@ -58,7 +58,12 @@ for (i,j), ax in zip(snp_tab_grouped, axs.flat):
     j.plot(kind='scatter',x='number',y="dist", ylim=(1,10000000), xlim=(0,len(j)),
             logy=True, title=i, c='colors', cmap='seismic')
     
-    
+    labels = j.GENE
+    for label, x, y in zip(labels, j.number, j.dist):
+        plt.annotate(
+            label, 
+            xy = (x, y), xytext = (-3, 3),
+            textcoords = 'offset points', ha = 'right', va = 'bottom')
     plt.ylabel('Intermutational Distance (BP)', fontsize=20)
     j["time"] = j.index
     j.time = pd.to_datetime(j.time)

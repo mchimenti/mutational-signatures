@@ -8,6 +8,8 @@
 NOTE: 
 If you are using hg38 instead of hg19, just edit line 101 to use the hg38 dictionary.
 
+Please edit line 46 (Entrez Email) to reflect your own email address.  
+
 DESCRIPTION: 
 A script to fetch SNPs from HG19 or HG38 reference genome and retrieve the trimer -1/+1 bases 
 on either side of the SNP.  These are then sorted and tabulated. Outputs for creating
@@ -201,7 +203,7 @@ def main():
         data["minus_one"] = snp_flank_left
         data["plus_one"] = snp_flank_right
         #write out each snp table as they are completed
-        data.to_csv('/Users/mchimenti/Desktop/snp_tab_' + name + '.csv', index=False)
+        data.to_csv(name + '.csv', index=False)
         
         trimer_tab = format_trimer_table(data)
         #for each tumor sample, get value counts at "code"; should be 96 codes total
